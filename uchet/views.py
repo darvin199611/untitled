@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, render_to_response, redirect
 from django.contrib import auth
+from django.template import Context
 from django.template import RequestContext
 
 from uchet.models import UserProfile, Market
@@ -13,9 +14,9 @@ from .forms import UserForm, UserProfileForm
 
 
 def main(request):
-    usr = request.user.username
-    markets = Market.objects.get(user=request.user)
-    return render(request, 'uchet/main.html', {'usr': usr, 'markets': markets, })
+    usr = request.user
+    markets = Market.objects.filter(user=usr).order_by('created_date')
+    return render(request, 'uchet/main.html', {'usr': usr, 'markets': markets})
 
 
 @login_required
