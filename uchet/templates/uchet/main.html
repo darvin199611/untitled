@@ -2,9 +2,13 @@
 
     {% block content %}
         {% if user.is_authenticated %}
-            zdarova {{ usr }}
+            Привет , {{ usr }} ,
             {% if markets%}
-            твои магазины : {{ markets}}
+            твои магазины :
+                {% for i in markets%}
+                    <h1><a href="{% url 'market_detail' id=i.id %}">{{i}}</a></h1>
+                {% endfor %}
+
                 {% else %}
                 у тебя нет магазинов
                 {% endif %}
