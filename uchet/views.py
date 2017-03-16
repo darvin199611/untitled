@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, HttpResponse
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, render_to_response, redirect
+from django.shortcuts import render, render_to_response, redirect , get_object_or_404
 from django.contrib import auth
 from django.template import Context
 from django.template import RequestContext
@@ -135,4 +135,9 @@ def profile__edit(request):
     else:
         usrform = UserProfileForm(instance=profile)
 
-    return render(request, 'uchet/profile__edit.html', {'form': usrform, 'profile': profile}, )
+    return render(request, 'uchet/profile__edit.html', {'form': usrform, 'profile': profile},)
+
+
+def market_detail(request, id):
+        market = get_object_or_404(Market, id=id)
+        return render(request, 'uchet/market_detail.html', {'market': market})
