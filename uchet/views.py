@@ -4,19 +4,22 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, HttpResponse
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, render_to_response, redirect , get_object_or_404
+from django.shortcuts import render, render_to_response, redirect, get_object_or_404
 from django.contrib import auth
 from django.template import Context
 from django.template import RequestContext
 
-from uchet.models import UserProfile, Market
+from uchet.models import UserProfile, Market, Stuff
 from .forms import UserForm, UserProfileForm
 
 
 def main(request):
-    usr = request.user
-    markets = Market.objects.filter(user=usr).order_by('created_date')
-    return render(request, 'uchet/main.html', {'usr': usr, 'markets': markets})
+    if request.user.is_authenticated:
+        markets = Market.spisok(request)
+        return render(request, 'uchet/main.html', {'markets': markets})
+    else:
+        return render(request, 'uchet/main.html')
+
 
 
 @login_required
@@ -135,9 +138,11 @@ def profile__edit(request):
     else:
         usrform = UserProfileForm(instance=profile)
 
-    return render(request, 'uchet/profile__edit.html', {'form': usrform, 'profile': profile},)
+    return render(request, 'uchet/profile__edit.html', {'form': usrform, 'profile': profile}, )
 
 
 def market_detail(request, id):
-        market = get_object_or_404(Market, id=id)
-        return render(request, 'uchet/market_detail.html', {'market': market})
+    market = get_object_or_404(Market, id=id)
+    stuffs = Stuff.objects.filter(market_id=id).order_by('created_date')
+
+    return render(request, 'uchet/market_detail.html', {'market': market, 'stuffs': stuffs})

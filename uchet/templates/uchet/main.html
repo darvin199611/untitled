@@ -2,7 +2,7 @@
 
     {% block content %}
         {% if user.is_authenticated %}
-            Привет , {{ usr }} ,
+            Привет , {{ user }} ,
             {% if markets%}
             твои магазины :
                 {% for i in markets%}

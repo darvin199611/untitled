@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.shortcuts import render
 from django.utils import timezone
 
 
@@ -10,6 +11,11 @@ class Market(models.Model):
     created_date = models.DateTimeField(
         default=timezone.now)
     picture = models.ImageField(upload_to='market_images', blank=True)
+
+    def spisok (request):
+        usr = request.user
+        markets = Market.objects.filter(user=usr).order_by('created_date')
+        return markets
 
     def __str__(self):
         return self.name
@@ -23,6 +29,8 @@ class Stuff(models.Model):
         default=timezone.now)
     picture = models.ImageField(upload_to='stuff_images', blank=True)
     price = models.DecimalField('Цена', max_digits=8, decimal_places=2, blank=True, null=True)
+    amount = models.PositiveIntegerField(default=0)
+
 
     def __str__(self):
         return self.name

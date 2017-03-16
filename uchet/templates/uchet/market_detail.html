@@ -1,15 +1,22 @@
     {% extends 'uchet/base.html' %}
 
     {% block content %}
-        <div class="post">
+        <div class="market">
             {% if market.created_date %}
                 <div class="date">
                     {{ market.created_date }}
                 </div>
             {% endif %}
             <h1>{{ market.description|linebreaksbr }}</h1>
-            {% if market.picture.url  %}
-            <p><img src={{market.picture.url }} align="left" alt="error" width="100" height="100" hspace="50" vspace="20"/>
+            {% if market.picture  %}
+            <p><img src={{market.picture.url }} align="left" alt="error" width="100" height="100" hspace="50" vspace="20"/></p>
             {% endif %}
+
+        </div>
+                <div class="stuffs">
+                {% for i in stuffs%}
+                 <p>   {{ i.name }} цена : {{ i.price }} количество : {{ i.amount }} </p>
+                {% endfor %}
+
         </div>
     {% endblock %}
