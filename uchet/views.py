@@ -146,3 +146,16 @@ def market_detail(request, id):
     stuffs = Stuff.objects.filter(market_id=id).order_by('created_date')
 
     return render(request, 'uchet/market_detail.html', {'market': market, 'stuffs': stuffs})
+
+
+def get_market_sales(request):
+    if request.GET:
+        market_id = request.GET.get("market_id")
+        data = market_id
+
+        if market_id != 0:
+            return HttpResponse(data, content_type='text/html',)
+        else:
+            return HttpResponse("no", content_type='text/html')
+    else:
+        pass
