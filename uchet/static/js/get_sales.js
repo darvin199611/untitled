@@ -1,7 +1,8 @@
-$("#check").click(function () {
+
+$("#check").click(function() {
 
 
-    var market_data = $('.market_data');
+    let market_data = $('.market_data');
     $.ajax({
         type: "GET",
         url: "/get_market_sales",
@@ -10,7 +11,7 @@ $("#check").click(function () {
         },
         dataType: "Text",
         cache: false,
-        success: function (data) {
+        success: function(data) {
             console.log(data)
 
         }

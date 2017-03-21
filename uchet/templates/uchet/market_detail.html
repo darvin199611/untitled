@@ -1,33 +1,29 @@
-    {% extends 'uchet/base.html' %}
-    {% load staticfiles %}
+ {% extends 'uchet/base.html' %} {% load staticfiles %} {% block content %}
+<div class="market_data" data-market_id="{{ market.id }}"></div>
 
-    {% block content %}
-        <div class="market_data" data-market_id = "{{ market.id }}"></div>
+<div class="market">
 
-        <div class="market">
-
-            {% if market.created_date %}
-                <div class="date">
-                    {{ market.created_date }}
-                </div>
-            {% endif %}
-            <h1>{{ market.description|linebreaksbr }}</h1>
-            {% if market.picture  %}
-            <p><img src={{market.picture.url }} align="left" alt="error" width="100" height="100" hspace="50" vspace="20"/></p>
-            {% endif %}
-        <div class="add-to-card-btn">
-            <button class="btn btn-sm btn-danger" id="check" >hui
+    {% if market.created_date %}
+    <div class="date">
+        {{ market.created_date }}
+    </div>
+    {% endif %}
+    <h1>{{ market.description|linebreaksbr }}</h1> {% if market.picture %}
+    <p><img src={{market.picture.url }} align="left" alt="error" width="100" height="100" hspace="50" vspace="20" /></p>
+    {% endif %}
+    <div class="add-to-card-btn">
+        <button class="btn btn-sm btn-danger" id="check">hui
 
 
             </button>
-        </div>
-        </div>
-                <div class="stuffs">
-                {% for i in stuffs%}
-                 <p>   {{ i.name }} цена : {{ i.price }} количество : {{ i.amount }} </p>
-                {% endfor %}
+    </div>
+</div>
+<div class="stuffs">
+    {% for i in stuffs%}
+    <p> {{ i.name }} цена : {{ i.price }} количество : {{ i.amount }} </p>
+    {% endfor %}
 
-        </div>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script src={% static "js/get_sales" %}></script>
-    {% endblock %}
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src={% static "js/get_sales.js" %}></script>
+{% endblock %}

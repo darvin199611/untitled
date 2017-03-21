@@ -1,13 +1,9 @@
+from django.contrib import auth
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
-from django.http import HttpResponseRedirect, HttpResponse
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, render_to_response, redirect, get_object_or_404
-from django.contrib import auth
-from django.template import Context
-from django.template import RequestContext
+from django.shortcuts import render, redirect, get_object_or_404
 
 from uchet.models import UserProfile, Market, Stuff
 from .forms import UserForm, UserProfileForm
@@ -151,9 +147,9 @@ def market_detail(request, id):
 def get_market_sales(request):
     if request.GET:
         market_id = request.GET.get("market_id")
-        data = market_id
+        data = Stuff.objects.filter(market_id=market_id)
 
-        if market_id != 0:
+        if data != 0:
             return HttpResponse(data, content_type='text/html',)
         else:
             return HttpResponse("no", content_type='text/html')

@@ -1,19 +1,17 @@
-    {% extends 'uchet/base.html' %}
-
-    {% block content %}
+{% extends 'uchet/base.html' %} {% block content %}
         {% if user.is_authenticated %}
             Привет , {{ user }} ,
-            {% if markets%}
-            твои магазины :
-                {% for i in markets%}
+              {% if markets%}
+                  твои магазины :
+                  {% for i in markets%}
                     <h1><a href="{% url 'market_detail' id=i.id %}">{{i}}</a></h1>
-                {% endfor %}
+                  {% endfor %}
 
-                {% else %}
+              {% else %}
                 у тебя нет магазинов
-                {% endif %}
+              {% endif %}
 
-          {% else %}
+        {% else %}
             ne avtorizirovan
-          {% endif %}
-    {% endblock content %}
+        {% endif %}
+{% endblock content %}

@@ -1,31 +1,28 @@
-    {% load staticfiles %}
-    <html>
-        <head>
-            <title>Uchet WEB</title>
-            <link rel="stylesheet" href="{% static 'css/uchet.css' %}">
-                <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic" rel="stylesheet" type="text/css">
+ {% load staticfiles %}
+<html>
 
-        </head>
-    <body>
-        <div class="page-header">
-            <h1><a href="/">Uchet WEB</a></h1>
-          {% if user.is_authenticated %}
-              <a href="/profile__edit">edit</a>
-              <a href="/logout">logout</a>
+<head>
+    <title>Uchet WEB</title>
+    <link rel="stylesheet" href="{% static 'css/uchet.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic" rel="stylesheet" type="text/css">
 
-          {% else %}
-            <a href="/register/">Register Here</a>
-            <a href="/login/">Login</a>
-          {% endif %}
-        </div>
-        <div class="content container">
-            <div class="row">
-                <div class="col-md-8">
-                {% block content %}
-                {% endblock %}
-                </div>
+</head>
+
+<body>
+    <div class="page-header">
+        <h1><a href="/">Uchet WEB</a></h1> {% if user.is_authenticated %}
+        <a href="/profile__edit">edit</a>
+        <a href="/logout">logout</a> {% else %}
+        <a href="/register/">Register Here</a>
+        <a href="/login/">Login</a> {% endif %}
+    </div>
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-8">
+                {% block content %} {% endblock %}
             </div>
         </div>
-    </body>
-    </html>
+    </div>
+</body>
 
+</html>
