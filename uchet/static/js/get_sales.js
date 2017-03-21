@@ -1,7 +1,4 @@
-
 $("#check").click(function() {
-
-
     let market_data = $('.market_data');
     $.ajax({
         type: "GET",
