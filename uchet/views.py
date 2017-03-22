@@ -1,12 +1,15 @@
+import pickle
 from django.contrib import auth
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.core import serializers
 from django.forms import model_to_dict
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 import json
-
+from django.core import serializers
 
 from uchet.models import UserProfile, Market, Stuff, Sales
 from .forms import UserForm, UserProfileForm
@@ -18,7 +21,6 @@ def main(request):
         return render(request, 'uchet/main.html', {'markets': markets})
     else:
         return render(request, 'uchet/main.html')
-
 
 
 @login_required
@@ -150,15 +152,36 @@ def market_detail(request, id):
 def get_market_sales(request):
     if request.GET:
         data = Sales.objects.filter(market_id=int(request.GET['market_id']))
-        submissions_json = [model_to_dict(sale)
-                            for sale in data]
+        submissions_json = [model_to_dict(submission)
+                            for submission in data]
         response_data = {
             'submissions': submissions_json
         }
+        print(response_data)
 
         return HttpResponse(json.dumps(response_data),
                             content_type="application/json")
 
 
+def get_market_saless(request):
+    if request.GET:
+        data = Stuff.objects.filter(market_id=int(request.GET['market_id']))
+        for i in data:
+            i.created_date = i.created_date.isoformat()
+            if i.picture:
+                j= "1488"
+                str(j)
+                print(j)
+                i.picture.delete()
+            else:
+                i.picture = "no picture"
 
+        submissions_json = [model_to_dict(submission,
+                                          fields=('name', 'market', 'amount', 'description', 'created_date',))
+                            for submission in data]
+        response_data = {
+            'submissions': submissions_json
+        }
+        print(response_data)
 
+        return HttpResponse(json.dumps(response_data), content_type="application/json", )

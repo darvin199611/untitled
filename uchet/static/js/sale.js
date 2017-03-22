@@ -3,10 +3,11 @@
         $.get('/get_market_sales', {
            'market_id': $('#market_id').val()
        }).done(function(data) {
+           console.log(data);
            var table = $('#sales');
-          table.html('<tr> <th>id товара</th> <th>id магазина</th> <th>название товара</th> <th>время</th> </tr>');
+          table.html('<tr> <th>id товара</th> <th>id магазина</th> <th>название товара</th> <th>date</th> </tr>');
           data.submissions.forEach(function (sale) {
-              console.log(sale)
+              console.log(sale);
               var row = $('<tr>');
               row.append($('<td>').text(sale.id));
               row.append($('<td>').text(sale.market));
@@ -19,5 +20,5 @@
 
   loadSubmissions();
 
-  setInterval(loadSubmissions, 5000);
+ // setInterval(loadSubmissions, 5000);
 })();

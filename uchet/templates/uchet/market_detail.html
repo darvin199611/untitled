@@ -13,7 +13,7 @@
     <p><img src={{market.picture.url }} align="left" alt="error" hspace="50" vspace="20" /></p>
     {% endif %}
     <div class="add-to-card-btn">
-        <button class="btn btn-sm btn-danger" id="check">check
+        <button class="btn bg-success" id="check">check
             </button>
     </div>
 </div>
@@ -23,7 +23,9 @@
     {% endfor %}
 
 </div>
-<table class="table table-striped" id="sales"  border="2" >
+<table class="table table-bordered" id="sales"  >
+</table>
+<table class="table table-bordered" id="stuffs"  >
 </table>
 <script src={% static "js/libs/jquery-3.2.0.js" %}></script>
 <script src={% static "js/sale.js" %}></script>
