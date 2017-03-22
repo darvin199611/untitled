@@ -9,7 +9,7 @@
               console.log(sale)
               var row = $('<tr>');
               row.append($('<td>').text(sale.id));
-              row.append($('<td>').html($('<pre>').text(sale.market)));
+              row.append($('<td>').text(sale.market));
               row.append($('<td>').text(sale.stuff_name));
               row.append($('<td>').text(" tyt budet vremya"));
               table.prepend(row);
