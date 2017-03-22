@@ -1,11 +1,14 @@
 from django.contrib import auth
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.forms import model_to_dict
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
+import json
 
-from uchet.models import UserProfile, Market, Stuff
+
+from uchet.models import UserProfile, Market, Stuff, Sales
 from .forms import UserForm, UserProfileForm
 
 
@@ -146,12 +149,16 @@ def market_detail(request, id):
 
 def get_market_sales(request):
     if request.GET:
-        market_id = request.GET.get("market_id")
-        data = Stuff.objects.filter(market_id=market_id)
+        data = Sales.objects.filter(market_id=int(request.GET['market_id']))
+        submissions_json = [model_to_dict(submission)
+                            for submission in data]
+        response_data = {
+            'submissions': submissions_json
+        }
 
-        if data != 0:
-            return HttpResponse(data, content_type='text/html',)
-        else:
-            return HttpResponse("no", content_type='text/html')
-    else:
-        pass
+        return HttpResponse(json.dumps(response_data),
+                            content_type="application/json")
+
+
+
+

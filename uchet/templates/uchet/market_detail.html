@@ -1,5 +1,6 @@
  {% extends 'uchet/base.html' %} {% load staticfiles %} {% block content %}
 <div class="market_data" data-market_id="{{ market.id }}"></div>
+<input type="hidden" id="market_id" value="{{ market.id }}">
 
 <div class="market">
 
@@ -22,6 +23,12 @@
     {% endfor %}
 
 </div>
+<table id="submissions" border="1">
+</table>
+
 <script src={% static "js/libs/jquery-3.2.0.js" %}></script>
+<script src={% static "js/sale.js" %}></script>
 <script src={% static "js/get_sales.js" %}></script>
 {% endblock %}
+
+

@@ -12,7 +12,7 @@ class Market(models.Model):
         default=timezone.now)
     picture = models.ImageField(upload_to='market_images', blank=True)
 
-    def spisok (request):
+    def spisok(request):
         usr = request.user
         markets = Market.objects.filter(user=usr).order_by('created_date')
         return markets
@@ -31,7 +31,6 @@ class Stuff(models.Model):
     price = models.DecimalField('Цена', max_digits=8, decimal_places=2, blank=True, null=True)
     amount = models.PositiveIntegerField(default=0)
 
-
     def __str__(self):
         return self.name
 
@@ -47,3 +46,13 @@ class UserProfile(models.Model):
     # Переопределяем метод __unicode__(), чтобы вернуть что-либо значимое! Используйте __str__() в Python 3.*
     def __str__(self):
         return self.user.username
+
+
+class Sales(models.Model):
+    market = models.ForeignKey(Market)
+    stuff_name = models.CharField(max_length=200,)
+
+    def __str__(self):
+        return self.stuff_name
+
+
