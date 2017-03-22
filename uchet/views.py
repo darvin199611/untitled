@@ -150,8 +150,8 @@ def market_detail(request, id):
 def get_market_sales(request):
     if request.GET:
         data = Sales.objects.filter(market_id=int(request.GET['market_id']))
-        submissions_json = [model_to_dict(submission)
-                            for submission in data]
+        submissions_json = [model_to_dict(sale)
+                            for sale in data]
         response_data = {
             'submissions': submissions_json
         }

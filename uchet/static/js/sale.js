@@ -3,15 +3,15 @@
         $.get('/get_market_sales', {
            'market_id': $('#market_id').val()
        }).done(function(data) {
-           var table = $('#submissions');
-          table.html('<tr> <th>#</th> <th>Код</th> <th>Статус</th> <th>Комментарий</th> </tr>');
-          data.submissions.forEach(function (submission) {
-              console.log(submission)
+           var table = $('#sales');
+          table.html('<tr> <th>id товара</th> <th>id магазина</th> <th>название товара</th> <th>время</th> </tr>');
+          data.submissions.forEach(function (sale) {
+              console.log(sale)
               var row = $('<tr>');
-              row.append($('<td>').text(submission.id));
-              row.append($('<td>').html($('<pre>').text(submission.market)));
-              row.append($('<td>').text(submission.stuff_name));
-              row.append($('<td>').text(submission.amount));
+              row.append($('<td>').text(sale.id));
+              row.append($('<td>').html($('<pre>').text(sale.market)));
+              row.append($('<td>').text(sale.stuff_name));
+              row.append($('<td>').text(" tyt budet vremya"));
               table.prepend(row);
           });
       });
