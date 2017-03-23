@@ -113,7 +113,7 @@ def user_login(request):
                 return HttpResponseRedirect('/')
             else:
                 # Использовался не активный аккуант - запретить вход!
-                return HttpResponse("Your Rango account is disabled.")
+                return HttpResponse("Your account is disabled.")
         else:
             # Были введены неверные данные для входа. Из-за этого вход в систему не возможен.
             print("Invalid login details: {0}, {1}".format(username, password))
