@@ -1,22 +1,22 @@
-{% extends 'uchet/base.html' %} {% block content %}
+{% extends 'uchet/base.html' %} {% load staticfiles %} {% load i18n widget_tweaks %} {% load bootstrap3 %}
+{% block content %}
 
 
 <body>
     <h1>Register </h1> {% if registered %} says: <strong>thank you for registering!</strong>
-    <a href="/">Return to the homepage.</a><br /> {% else %} says: <strong>register here!</strong><br />
+    <a href="/">Return to the homepage.</a><br /> {% else %}
 
     <form id="user_form" method="post" action="/register/" enctype="multipart/form-data">
 
         {% csrf_token %}
+        {% bootstrap_field user_form.username show_label=false size='medium' %}
+        {% bootstrap_field user_form.password show_label=false placeholder="Пароль" %}
+        {% bootstrap_field user_form.email show_label=false  %}
+        {% bootstrap_field profile_form.website show_label=false placeholder="Сайт" %}
+        {% bootstrap_field profile_form.picture show_label=false placeholder="Аватар" %}
 
-        <!-- Выводим на экран каждую форму. Метод as_p помещает каждый элемент в абзац (тег <p>). Это гарантирует, что каждый элемент появится на новой строке, улучшая внешний вид формы. -->
-       Имя пользователя {{user_form.username}}
-       Почта            {{user_form.email}}
-       Пароль           {{user_form.password}}
-       Сайт             {{profile_form.website}}
-       Картинка         {{profile_form.picture}}
         <!-- Создаем кнопку для отправления данных формы. -->
-        <input type="submit" name="submit" value="Complete Register" />
+        <input type="submit" name="submit" value="Register" />
     </form>
     {% endif %}
 </body>
