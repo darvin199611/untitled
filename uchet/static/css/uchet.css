@@ -1,21 +1,91 @@
-    .page-header {
-        background-color: #5d8dff;
-        margin-top: 0;
-        padding: 20px 20px 20px 40px;
-    }
-
-    .page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
-        color: rgb(255, 255, 255);
-        font-size: 36pt;
-        text-decoration: none;
-        font-family: 'Lobster', cursive;
-    }
-
     .menu a{
         position: relative;
         top: 105px;
     }
+
+    .menu1 a{
+        position: relative;
+        top: 65px;
+        left: 90px;
+    }
     .hi {
         position: relative;
         top: 100px;
+    }
 
+    .form-down {
+        position: relative;
+        top: 150px;
+
+    }
+
+
+    .navba {
+    padding-top: 40px;
+
+    }
+
+/* цвет фона и рамки навигационного меню */
+    .navbar-default {
+        background-color: #55a2f9;
+        border-color: #55a2f9;
+    }
+/* цвет текста, содержащий название сайта или бренда */
+.navbar-default .navbar-brand{
+    color: #fffbfb;
+}
+/* цвет текста (название сайта или бренда), при поднесении к нему курсора мышки или при его нахождении в фокусе */
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: #d1ffed;
+}
+
+/* Цвет пунктов навигационного меню */
+.navbar-default .navbar-nav > li > a {
+    color: #ecf0f1;
+}
+
+/* Цвет пункта меню, при поднесении к нему курсора мышки или при его нахождении в фокусе */
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #d1ffed;
+}
+/* Цвет и фон активного пункта меню, а также поднесении к нему курсора мышки или при его нахождении в фокусе */
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #ecf0f1;
+    background-color: rgba(41, 121, 204, 0.66);
+}
+/* Цвет и фон открытого пункта меню, а также поднесении к нему курсора мышки или при его нахождении в фокусе */
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+    color: #d1ffed;
+    background-color: #4b93ff;
+}
+
+body
+{
+padding-top: 50px;
+background-color: #c4d9f9;
+}
+
+.splash {
+/* ќтступ до содержимого splash */
+padding:9em 0 2em;
+background-image:url("https://habrastorage.org/files/6a1/330/15b/6a133015b79444d8a63511ad47e55e75.jpg");
+/*ћасштабирует изображение с сохранением пропорций так, чтобы его ширина или высота равн¤лась ширине или высоте блока.*/
+position:fixed;
+        z-index: -1;
+        top:0;
+        left:0;
+        min-width:100%;
+        min-height:22%;
+}
+
+article {
+display:block;
+padding: 15em 0 3em;
+border-bottom: 1px solid rgba(0,0,0,0.05);
+}

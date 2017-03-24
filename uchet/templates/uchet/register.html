@@ -3,21 +3,28 @@
 
 
 <body>
-    <h1>Register </h1> {% if registered %} says: <strong>thank you for registering!</strong>
+<div class="form-down">
+    <h1>Регистрация</h1> {% if registered %} says: <strong>thank you for registering!</strong>
     <a href="/">Return to the homepage.</a><br /> {% else %}
 
     <form id="user_form" method="post" action="/register/" enctype="multipart/form-data">
 
         {% csrf_token %}
-        {% bootstrap_field user_form.username show_label=false size='medium' %}
-        {% bootstrap_field user_form.password show_label=false placeholder="Пароль" %}
-        {% bootstrap_field user_form.email show_label=false  %}
-        {% bootstrap_field profile_form.website show_label=false placeholder="Сайт" %}
-        {% bootstrap_field profile_form.picture show_label=false placeholder="Аватар" %}
-
+       <div class="form-group" style="width: 70%">{% bootstrap_field user_form.username show_label=false size='medium' %}
+       </div>
+       <div class="form-group" style="width: 70%"> {% bootstrap_field user_form.password show_label=false placeholder="Пароль" %}
+       </div>
+       <div class="form-group" style="width: 70%"> {% bootstrap_field user_form.email show_label=false  %}
+       </div>
+       <div class="form-group" style="width: 70%">{% bootstrap_field profile_form.website show_label=false placeholder="Сайт" %}
+       </div>
+       <div class="form-group" style="width: 70%"> {% bootstrap_field profile_form.picture show_label=false placeholder="Аватар" %}
+       </div>
         <!-- Создаем кнопку для отправления данных формы. -->
-        <input type="submit" name="submit" value="Register" />
+        <button type="submit" name="submit" class="btn btn-primary">Зарегистрироваться</button>
+
     </form>
     {% endif %}
+</div>
 </body>
 {% endblock content %}
