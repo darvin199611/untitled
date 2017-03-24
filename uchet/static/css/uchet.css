@@ -10,3 +10,12 @@
         text-decoration: none;
         font-family: 'Lobster', cursive;
     }
+
+    .menu a{
+        position: relative;
+        top: 105px;
+    }
+    .hi {
+        position: relative;
+        top: 100px;
+
