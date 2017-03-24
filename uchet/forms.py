@@ -1,6 +1,13 @@
-from django.forms import forms
+import json
+from django.views.generic import FormView
+from django.forms import forms, models
 from django import forms
 from django.contrib.auth.models import User
+from django.http import HttpResponse
+from django.http import HttpResponseBadRequest
+from django.contrib.auth.forms import PasswordChangeForm
+from django.forms.models import modelform_factory
+
 from .models import UserProfile
 
 
@@ -16,5 +23,6 @@ class UserProfileForm(forms.ModelForm):
     class Meta():
         model = UserProfile
         fields = ('website', 'picture')
+
 
 
