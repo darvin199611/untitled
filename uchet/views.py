@@ -2,6 +2,7 @@ import pickle
 from django.contrib import auth
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.core import serializers
 from django.forms import model_to_dict
 from django.http import HttpResponse
@@ -30,20 +31,15 @@ def logout(request):
 
 
 def register(request):
-    # Логическое значение указывающее шаблону прошла ли регистрация успешно.
-    # В начале ему присвоено значение False. Код изменяет значение на True, если регистрация прошла успешно.
+
+
     registered = False
 
-    # Если это HTTP POST, мы заинтересованы в обработке данных формы.
     if request.method == 'POST':
-        # Попытка извлечь необработанную информацию из формы.
-        # Заметьте, что мы используем UserForm и UserProfileForm.
         user_form = UserForm(data=request.POST)
         profile_form = UserProfileForm(data=request.POST)
 
-        # Если в две формы введены правильные данные...
         if user_form.is_valid() and profile_form.is_valid():
-            # Сохранение данных формы с информацией о пользователе в базу данных.
             user = user_form.save()
 
             # Теперь мы хэшируем пароль с помощью метода set_password.
@@ -117,7 +113,11 @@ def user_login(request):
         else:
             # Были введены неверные данные для входа. Из-за этого вход в систему не возможен.
             print("Invalid login details: {0}, {1}".format(username, password))
-            return HttpResponse("Неверный логин или пароль")
+            if username or password == 0:
+                error = "Неверный логин или пароль"
+            else:
+                error = "заполните все поля"
+            return render(request, 'uchet/login.html', {'error': error})
 
     # Запрос не HTTP POST, поэтому выводим форму для входа в систему.
     # В этом случае скорее всего использовался HTTP GET запрос.
@@ -126,15 +126,21 @@ def user_login(request):
         # объект пустого словаря...
         return render(request, 'uchet/login.html', {})
 
+@login_required
+def profile(request):
+    user = User.objects.get(username=request.user)
+    profile = UserProfile.objects.get(user=request.user)
+    return render(request, 'uchet/profile.html', {'profile': profile, 'user': user})
 
-# views.py
+
 @login_required
 def profile__edit(request):
     profile = UserProfile.objects.get(user=request.user)
-    form = UserProfileForm(request.POST, request.FILES or None, instance=profile)
+    form = UserProfileForm(request.POST, request.FILES or None, instance=profile, auto_id=False)
 
-    if request.POST and form.is_valid():
-        form.save()
+    if request.POST :
+        if form.is_valid():
+            form.save()
         return redirect('profile__edit')
     else:
         usrform = UserProfileForm(instance=profile)
@@ -169,7 +175,7 @@ def get_market_saless(request):
         for i in data:
             i.created_date = i.created_date.isoformat()
             if i.picture:
-                j= "1488"
+                j = "1488"
                 str(j)
                 print(j)
                 i.picture.delete()
@@ -185,3 +191,15 @@ def get_market_saless(request):
         print(response_data)
 
         return HttpResponse(json.dumps(response_data), content_type="application/json", )
+
+
+def check_login(request):
+    if request.GET:
+        data = User.objects.filter(username=request.GET['username']).exists()
+        if data:
+            return HttpResponse("no", content_type='text/html')
+        else:
+            return HttpResponse("yes", content_type='text/html')
+
+
+

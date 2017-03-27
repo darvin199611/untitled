@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'uchet',
     'django_cleanup',
     'bootstrap3',
+    'widget_tweaks',
+
 ]
 
 MIDDLEWARE = [
