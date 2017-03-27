@@ -1,0 +1,36 @@
+body
+{
+font-family: 'Arial', 'sans-serif';
+}
+.profile
+{
+ position: relative;
+ top: 175px;
+ min-height: 55px;
+ display: inline-block;
+ width: 550px;
+    height: 300px;
+
+}
+figcaption.ratings
+{
+margin-top:20px;
+}
+
+
+img.img-profile {
+ position: relative;
+ left: 20px;
+    top: 20px;
+    width: 100px;
+height: 100px;
+}
+.edit-profile {
+
+     font-size: 50px;
+     position: relative;
+ left: 0px;
+    top: -20px;
+}
+
+

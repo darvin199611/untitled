@@ -1,6 +1,6 @@
 {% extends 'uchet/base.html' %} {% load widget_tweaks %}{% block content %}
 
-
+  <div class="form-down">
     <div class="profile">
     <form action="{% url 'profile__edit' %}" method="post" enctype="multipart/form-data" >
         {% csrf_token %}
@@ -17,4 +17,5 @@
        <button class="btn btn-default" type="submit">Submit</button>
     </form>
     </div>
+  </div>
     {% endblock %}
