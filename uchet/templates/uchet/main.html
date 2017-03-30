@@ -1,6 +1,6 @@
 {% extends 'uchet/base.html' %} {% block content %}
         {% if user.is_authenticated %}
-            Привет , {{ user }} ,
+           <div class="hi">Привет , {{ user }} ,
               {% if markets%}
                   твои магазины :
                   {% for i in markets%}
@@ -13,5 +13,6 @@
 
         {% else %}
             ne avtorizirovan
+           </div>
         {% endif %}
 {% endblock content %}

@@ -39,8 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'uchet',
     'django_cleanup',
-    'widget_tweaks',
     'bootstrap3',
+    'widget_tweaks',
+
 ]
 
 MIDDLEWARE = [
