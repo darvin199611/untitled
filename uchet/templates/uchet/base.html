@@ -12,7 +12,7 @@
 <body>
     <div class="page-header">
         <h1><a href="/">Uchet WEB</a></h1> {% if user.is_authenticated %}
-        <a href="/profile" >Профиль</a>
+        <a href="/profile">Профиль</a>
         <a href="/logout">Выход</a> {% else %}
         <a href="/register/">Зарегестрироваться</a>
         <a href="/login/">Войти</a> {% endif %}
