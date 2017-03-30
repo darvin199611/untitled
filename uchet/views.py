@@ -1,4 +1,5 @@
 import pickle
+
 from django.contrib import auth
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
@@ -11,8 +12,10 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 import json
 from django.core import serializers
+from django.utils import timezone
+from django.utils.datetime_safe import datetime
 
-from uchet.models import UserProfile, Market, Stuff, Sales
+from uchet.models import UserProfile, Market, Stuff, Sale
 from .forms import UserForm, UserProfileForm
 
 
@@ -31,8 +34,6 @@ def logout(request):
 
 
 def register(request):
-
-
     registered = False
 
     if request.method == 'POST':
@@ -126,6 +127,7 @@ def user_login(request):
         # объект пустого словаря...
         return render(request, 'uchet/login.html', {})
 
+
 @login_required
 def profile(request):
     user = User.objects.get(username=request.user)
@@ -138,7 +140,7 @@ def profile__edit(request):
     profile = UserProfile.objects.get(user=request.user)
     form = UserProfileForm(request.POST, request.FILES or None, instance=profile, auto_id=False)
 
-    if request.POST :
+    if request.POST:
         if form.is_valid():
             form.save()
         return redirect('profile__edit')
@@ -157,9 +159,14 @@ def market_detail(request, id):
 
 def get_market_sales(request):
     if request.GET:
-        data = Sales.objects.filter(market_id=int(request.GET['market_id']))
-        submissions_json = [model_to_dict(submission)
-                            for submission in data]
+        market_id = request.GET['market_id']
+        today = datetime.now()
+        data = Sale.objects.filter(stuff__market_id=market_id)
+        data = data.filter(datetime__day=today.day, datetime__month=today.month, datetime__year=today.year)
+        submissions_json = []
+        for si in data:
+            submissions_json.append({'stuff': si.stuff.name, 'price': str(si.stuff.price),
+                                     'dt': (timezone.localtime(si.datetime)).strftime('%Y-%m-%d %H:%M')})
         response_data = {
             'submissions': submissions_json
         }
@@ -169,30 +176,6 @@ def get_market_sales(request):
                             content_type="application/json")
 
 
-def get_market_saless(request):
-    if request.GET:
-        data = Stuff.objects.filter(market_id=int(request.GET['market_id']))
-        for i in data:
-            i.created_date = i.created_date.isoformat()
-            if i.picture:
-                j = "1488"
-                str(j)
-                print(j)
-                i.picture.delete()
-            else:
-                i.picture = "no picture"
-
-        submissions_json = [model_to_dict(submission,
-                                          fields=('name', 'market', 'amount', 'description', 'created_date',))
-                            for submission in data]
-        response_data = {
-            'submissions': submissions_json
-        }
-        print(response_data)
-
-        return HttpResponse(json.dumps(response_data), content_type="application/json", )
-
-
 def check_login(request):
     if request.GET:
         data = User.objects.filter(username=request.GET['username']).exists()
@@ -200,6 +183,3 @@ def check_login(request):
             return HttpResponse("no", content_type='text/html')
         else:
             return HttpResponse("yes", content_type='text/html')
-
-
-

@@ -18,16 +18,11 @@
             </button>
     </div>
 </div>
-<div class="stuffs">
-    {% for i in stuffs%}
-    <p> {{ i.name }} цена : {{ i.price }} количество : {{ i.amount }} </p>
-    {% endfor %}
 
 </div>
-<table class="table table-bordered" id="sales">
+<table class="table" id="sales">
 </table>
-<table class="table table-bordered" id="stuffs">
-</table>
+
 <script src={% static "js/libs/jquery-3.2.0.js" %}></script>
 <script src={% static "js/sale.js" %}></script>
 <script src={% static "js/get_sales.js" %}></script>
