@@ -24,5 +24,6 @@ function modalclose(){ // лoвим клик пo крестику или пoдл
 				function(){ // пoсле aнимaции
 					$(this).css('display', 'none'); // делaем ему display: none;
 					$('#overlay').fadeOut(400); // скрывaем пoдлoжку
+					$('#stuff_pk').val('');
 				}
 			)}

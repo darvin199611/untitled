@@ -62,7 +62,7 @@ function get_stuff(stuff_pk,market_id) {
         // handle a successful response
         success :
             function(json) {
-            $('#stuff_pk').val(''); // remove the value from the input
+            // remove the value from the input
             $("#stuffname").html("Товар : "+ json.stuffs.name );
             $("#stuffimage").html("<p><img src=/media/"+ json.stuffs.picture +" align='left' alt='изображение отсутствует' hspace='50' vspace='20'/></p>");
             $("#stuffdescription").html("Описание : "+ json.stuffs.description);
