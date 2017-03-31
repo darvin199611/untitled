@@ -2,35 +2,43 @@ body
 {
 font-family: 'Arial', 'sans-serif';
 }
+
+#profile-card{
+    position: absolute;
+    top: 33%;
+    left: 33%;
+}
+
 .profile
 {
- position: relative;
- top: 175px;
+
  min-height: 55px;
  display: inline-block;
  width: 550px;
     height: 300px;
-
+    margin: auto;
 }
 figcaption.ratings
 {
 margin-top:20px;
 }
 
+#image_profile {
+    position: relative;
+    bottom: 80%;
+    left: 70%;
+    width: auto;
+}
 
-img.img-profile {
- position: relative;
- left: 20px;
-    top: 20px;
+.img-profile{
     width: 100px;
-height: 100px;
+    height: 100px;
 }
 .edit-profile {
 
      font-size: 50px;
      position: relative;
- left: 0px;
-    top: -20px;
+    bottom: 10px;
 }
 
 

@@ -22,7 +22,7 @@
     }
     .hi {
         position: relative;
-        top: 100px;
+        top: 7%;
     }
 
     .form-down {
@@ -76,11 +76,7 @@
     background-color: #4b93ff;
 }
 
-body
-{
-padding-top: 0px;
-background-color: #c4d9f9;
-}
+
 
 
 
