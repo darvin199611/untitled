@@ -19,10 +19,12 @@
 
 
 
-
-<table class="table" id="sales">
+<body>
+<div class="container">
+    <table class="table simple-little-table" cellspacing="0" id="sales">
 </table>
-
+</div>
+</body>
 <div id="modal_form"><!-- Сaмo oкнo -->
       <span id="modal_close">X</span> <!-- Кнoпкa зaкрыть -->
 
@@ -37,7 +39,7 @@
 <div id="overlay"></div><!-- Пoдлoжкa -->
 <button class="button" name ="go" id="go"> Показать модальное окно</button>
 <script src={% static "js/libs/jquery-3.2.0.js" %}></script>
-<script src={% static "js/sale.js" %}></script>
+ <script src={% static "js/sale.js" %}></script>
 
 <script src="{%static 'js/modal_window.js'%} "></script>
 {% endblock %}

@@ -3,7 +3,7 @@
             'market_id': $('#market_id').val()
         }).done(function(data) {
             var table = $('#sales');
-            table.html('<tr><th>наименование товара</th><th>Цена</th><th>Время</th> </tr>');
+            table.html('<thead><tr><th>Товар</th><th>Цена</th><th>Время</th> </tr></thead>');
             data.submissions.forEach(function(sale) {
                 console.log(sale);
                 var row = $('<tr>');
