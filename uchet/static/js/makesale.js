@@ -1,11 +1,10 @@
-$('#get_stuff_form').on('submit', function(event){
-    event.preventDefault();//останавливает стандартное поведение (перезагрузку страницы)
-    var stuff_pk =$('#stuff_pk').val();
-    var market_id =$('#market_id').val();
-    $('#modal_form').data("stuff_pk",stuff_pk);
-    get_stuff(stuff_pk,market_id);
-
+/**
+ * Created by skryn on 28.03.2017.
+ */
+$('#successbtn').click(function () {
+    create_sale();
 });
+
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie != '') {
@@ -51,34 +50,18 @@ $.ajaxSetup({
     }
 });
 
-// AJAX for posting
-function get_stuff(stuff_pk,market_id) {
-    //noinspection JSDuplicatedDeclaration
+function create_sale() {
     $.ajax({
-        url : "/get_stuff/", // the endpoint
+        url : "/make_sale/", // the endpoint
         type : "POST", // http method
-        data : { stuff_pk : stuff_pk, market_id :market_id},                  // data sent with the post request
+        data : { stuff_pk : $('#modal_form').data("stuff_pk")},                  // data sent with the post request
 
         // handle a successful response
-        success :
-            function(json) {
-            $('#stuff_pk').val(''); // remove the value from the input
-            $("#stuffname").html("Товар : "+ json.stuffs.name );
-            $("#stuffimage").html("<p><img src=/media/"+ json.stuffs.picture +" align='left' alt='изображение отсутствует' hspace='50' vspace='20'/></p>");
-            $("#stuffdescription").html("Описание : "+ json.stuffs.description);
-            $("#stuffamount").html("Количество на складе : "+ json.stuffs.amount);
-            $("#stuffprice").html("Цена: "+ json.stuffs.price);
-            showmodal();
-
-        },
-
-        // handle a non-successful response
-        error : function(xhr,errmsg,err) {
-            $('#results').html("<div class='alert alert-danger'>Ошибка : такого товара нет в магазине!"+
-                "<a href='' class='close'>&times;</a></div>"); // add the error to the dom
-            console.log(xhr.status + ": "+err ); // provide a bit more info about the error to the console
+        success : function() {
+            modalclose();
+            loadSales();
         }
+
+
     });
 }
-
-
