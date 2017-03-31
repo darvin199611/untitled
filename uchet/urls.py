@@ -12,6 +12,8 @@ urlpatterns = [
     url(r'^get_market_sales/$', views.get_market_sales, name='get_market_sales'),
     url(r'^check_login/$', views.check_login, name='check_login'),
     url(r'^profile/$', views.profile, name='profile'),
+    url(r'^get_stuff/$', views.get_stuff, name='get_stuff'),
+    url(r'^make_sale/$', views.make_sale, name='make_sale'),
 
 
 ]

@@ -16,30 +16,38 @@
     {% endif %}
     </div>
 </div>
+<div>
 
+                 <form method="POST" class="form-group" id="get_stuff_form">{% csrf_token %}
+                    <br/> <div class="fieldWrapper" id="the_stuff_get">
+                         <input type="number" class="form-control" min="1" max="9999"   id="stuff_pk" required placeholder="Штрих-код" name="stuff_pk">
+                         <div id="results" ></div> <!-- errors go here -->
+                     </div>
+                     <button type="submit" class="btn btn-success">Submit</button>
+                  </form>
 
-
-<body>
-<div class="container">
-    <table class="table simple-little-table" cellspacing="0" id="sales">
-</table>
 </div>
-</body>
+
+<table class="table" id="sales">
+</table>
+
 <div id="modal_form"><!-- Сaмo oкнo -->
       <span id="modal_close">X</span> <!-- Кнoпкa зaкрыть -->
 
                     <div id="cheto">
-                        <div id="postautor" > </div>
-                        <div id="postnomer" > </div>
-                        <div id="posttext" > </div>
-                        <div id="postdate" > </div>
+                        <div id="stuffname" > </div>
+                        <div id="stuffdescription" > </div>
+                        <div id="stuffimage" > </div>
+                        <div id="stuffamount" > </div>
+                        <div id="stuffprice" > </div>
                     </div>
     <button type="button" class="btn btn-success" id="successbtn">Продать</button>
 </div>
 <div id="overlay"></div><!-- Пoдлoжкa -->
 <button class="button" name ="go" id="go"> Показать модальное окно</button>
 <script src={% static "js/libs/jquery-3.2.0.js" %}></script>
- <script src={% static "js/sale.js" %}></script>
-
-<script src="{%static 'js/modal_window.js'%} "></script>
+<script src={% static "js/sale.js" %}></script>
+<script src={% static "js/makesale.js" %}></script>
+<script src={%static 'js/get_stuff_to_modal.js'%}></script>
+<script src={%static 'js/modal_window.js'%}></script>
 {% endblock %}

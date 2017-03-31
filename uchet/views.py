@@ -170,7 +170,6 @@ def get_market_sales(request):
         response_data = {
             'submissions': submissions_json
         }
-        print(response_data)
 
         return HttpResponse(json.dumps(response_data),
                             content_type="application/json")
@@ -183,3 +182,33 @@ def check_login(request):
             return HttpResponse("no", content_type='text/html')
         else:
             return HttpResponse("yes", content_type='text/html')
+
+
+def get_stuff(request):
+    if request.method == 'POST':
+        stuff_pk = request.POST.get('stuff_pk')
+        market_id = request.POST.get('market_id')
+        st = Stuff.objects.filter(market_id=market_id)
+        stuffget = st.get(id=stuff_pk)
+        stuffs = {'name': stuffget.name, 'description': stuffget.description, 'picture': str(stuffget.picture),
+                  'price': str(stuffget.price), 'amount': str(stuffget.amount)}
+
+        response_data = {
+            'stuffs': stuffs
+        }
+
+        return JsonResponse(response_data)
+
+    else:
+        return HttpResponse(
+            json.dumps({"nothing to see": "this isn't happening"}),
+            content_type="application/json"
+        )
+
+
+def make_sale(request):
+    if request.method == "POST":
+        stuff_pk = request.POST.get('stuff_pk')
+        sale = Sale(stuff_id=stuff_pk)
+        sale.save()
+        return HttpResponse("done")
