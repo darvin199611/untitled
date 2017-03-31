@@ -27,15 +27,10 @@
 
     .form-down {
         position: relative;
-        top: 150px;
+        top: 15%;
 
     }
 
-
-    .navba {
-    padding-top: 40px;
-
-    }
 
 /* цвет фона и рамки навигационного меню */
     .navbar-default {
@@ -79,21 +74,10 @@
 
 body
 {
-padding-top: 50px;
+padding-top: 0px;
 background-color: #c4d9f9;
 }
 
-.splash {
-/* ќтступ до содержимого splash */
-padding:9em 0 2em;
-background-image:url("https://habrastorage.org/files/6a1/330/15b/6a133015b79444d8a63511ad47e55e75.jpg");
-/*ћасштабирует изображение с сохранением пропорций так, чтобы его ширина или высота равн¤лась ширине или высоте блока.*/
-position:fixed;
-        z-index: -1;
-        top:0;
-        left:0;
-        min-width:100%;
-        min-height:22%;
-}
+
 
 
