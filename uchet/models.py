@@ -48,11 +48,12 @@ class UserProfile(models.Model):
         return self.user.username
 
 
-class Sales(models.Model):
-    market = models.ForeignKey(Market)
-    stuff_name = models.CharField(max_length=200,)
+class Sale(models.Model):
+    stuff = models.ForeignKey(Stuff)
+    datetime = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['datetime']
 
     def __str__(self):
-        return self.stuff_name
-
-
+        return self.stuff.name

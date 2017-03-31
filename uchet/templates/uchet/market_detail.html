@@ -1,11 +1,11 @@
  {% extends 'uchet/base.html' %} {% load staticfiles %} {% block content %}
-<link rel="stylesheet" href="{% static 'css/market.css' %}">
+    <link rel="stylesheet" href="{% static 'css/market_detail.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic" rel="stylesheet" type="text/css">
     <div class="form-down">
 <div class="market_data" data-market_id="{{ market.id }}"></div>
 <input type="hidden" id="market_id" value="{{ market.id }}">
 
 <div class="market">
-
     {% if market.created_date %}
     <div class="date">
         {{ market.created_date }}
@@ -14,17 +14,30 @@
     <h1>{{ market.description|linebreaksbr }}</h1> {% if market.picture %}
     <p><img src={{market.picture.url }} align="left" alt="error" hspace="50" vspace="20" /></p>
     {% endif %}
-    <div class="add-to-card-btn">
-        <button class="btn bg-success" id="check">check
-            </button>
     </div>
 </div>
-    <body>
-<table class="simple-little-table" id="sales" cellspacing='0'>
+
+
+
+
+<table class="table" id="sales">
 </table>
-    </body>
+
+<div id="modal_form"><!-- Сaмo oкнo -->
+      <span id="modal_close">X</span> <!-- Кнoпкa зaкрыть -->
+
+                    <div id="cheto">
+                        <div id="postautor" > </div>
+                        <div id="postnomer" > </div>
+                        <div id="posttext" > </div>
+                        <div id="postdate" > </div>
+                    </div>
+    <button type="button" class="btn btn-success" id="successbtn">Продать</button>
+</div>
+<div id="overlay"></div><!-- Пoдлoжкa -->
+<button class="button" name ="go" id="go"> Показать модальное окно</button>
 <script src={% static "js/libs/jquery-3.2.0.js" %}></script>
 <script src={% static "js/sale.js" %}></script>
-<script src={% static "js/get_sales.js" %}></script>
-    </div>
+
+<script src="{%static 'js/modal_window.js'%} "></script>
 {% endblock %}
