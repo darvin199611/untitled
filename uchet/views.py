@@ -212,3 +212,7 @@ def make_sale(request):
         sale = Sale(stuff_id=stuff_pk)
         sale.save()
         return HttpResponse("done")
+
+
+def control(request):
+    return render(request, 'uchet/control.html')

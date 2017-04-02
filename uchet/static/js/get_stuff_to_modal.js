@@ -1,11 +1,12 @@
-$('#get_stuff_form').on('submit', function(event){
-    event.preventDefault();//останавливает стандартное поведение (перезагрузку страницы)
-    var stuff_pk =$('#stuff_pk').val();
-    var market_id =$('#market_id').val();
-    $('#modal_form').data("stuff_pk",stuff_pk);
-    get_stuff(stuff_pk,market_id);
+$('#get_stuff_form').on('submit', function (event) {
+    event.preventDefault(); //останавливает стандартное поведение (перезагрузку страницы)
+    var stuff_pk = $('#stuff_pk').val();
+    var market_id = $('#market_id').val();
+    $('#modal_form').data("stuff_pk", stuff_pk);
+    get_stuff(stuff_pk, market_id);
 
 });
+
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie != '') {
@@ -27,6 +28,7 @@ function csrfSafeMethod(method) {
     // these HTTP methods do not require CSRF protection
     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
 }
+
 function sameOrigin(url) {
     // test that a given url is a same-origin URL
     // url could be relative or scheme relative or absolute
@@ -41,7 +43,7 @@ function sameOrigin(url) {
         !(/^(\/\/|http:|https:).*/.test(url));
 }
 $.ajaxSetup({
-    beforeSend: function(xhr, settings) {
+    beforeSend: function (xhr, settings) {
         if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
             // Send the token to same-origin, relative URLs only.
             // Send the token only if the method warrants CSRF protection
@@ -52,33 +54,33 @@ $.ajaxSetup({
 });
 
 // AJAX for posting
-function get_stuff(stuff_pk,market_id) {
+function get_stuff(stuff_pk, market_id) {
     //noinspection JSDuplicatedDeclaration
     $.ajax({
-        url : "/get_stuff/", // the endpoint
-        type : "POST", // http method
-        data : { stuff_pk : stuff_pk, market_id :market_id},                  // data sent with the post request
+        url: "/get_stuff/", // the endpoint
+        type: "POST", // http method
+        data: {
+            stuff_pk: stuff_pk,
+            market_id: market_id
+        }, // data sent with the post request
 
         // handle a successful response
-        success :
-            function(json) {
+        success: function (json) {
             // remove the value from the input
-            $("#stuffname").html("Товар : "+ json.stuffs.name );
-            $("#stuffimage").html("<p><img src=/media/"+ json.stuffs.picture +" align='left' alt='изображение отсутствует' hspace='50' vspace='20'/></p>");
-            $("#stuffdescription").html("Описание : "+ json.stuffs.description);
-            $("#stuffamount").html("Количество на складе : "+ json.stuffs.amount);
-            $("#stuffprice").html("Цена: "+ json.stuffs.price);
+            $("#stuffname").html("Товар : " + json.stuffs.name);
+            $("#stuffimage").html("<p><img src=/media/" + json.stuffs.picture + " align='left' alt='изображение отсутствует' hspace='50' vspace='20'/></p>");
+            $("#stuffdescription").html("Описание : " + json.stuffs.description);
+            $("#stuffamount").html("Количество на складе : " + json.stuffs.amount);
+            $("#stuffprice").html("Цена: " + json.stuffs.price);
             showmodal();
 
         },
 
         // handle a non-successful response
-        error : function(xhr,errmsg,err) {
-            $('#results').html("<div class='alert alert-danger'>Ошибка : такого товара нет в магазине!"+
+        error: function (xhr, errmsg, err) {
+            $('#results').html("<div class='alert alert-danger'>Ошибка : такого товара нет в магазине!" +
                 "<a href='' class='close'>&times;</a></div>"); // add the error to the dom
-            console.log(xhr.status + ": "+err ); // provide a bit more info about the error to the console
+            console.log(xhr.status + ": " + err); // provide a bit more info about the error to the console
         }
     });
 }
-
-
