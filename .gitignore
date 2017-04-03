@@ -1,0 +1,8 @@
+/myvenv/
+/.idea/
+/idea/
+*.zip
+*.log
+*.pdf
+*.xls
+db.sqlite3

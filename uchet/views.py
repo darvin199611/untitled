@@ -1,20 +1,19 @@
+import csv
 import pickle
 
+from datetime import date
 from django.contrib import auth
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.core import serializers
-from django.forms import model_to_dict
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 import json
-from django.core import serializers
 from django.utils import timezone
 from django.utils.datetime_safe import datetime
-
+from django.db.models.functions import datetime
 from uchet.models import UserProfile, Market, Stuff, Sale
 from .forms import UserForm, UserProfileForm
 
@@ -160,7 +159,7 @@ def market_detail(request, id):
 def get_market_sales(request):
     if request.GET:
         market_id = request.GET['market_id']
-        today = datetime.now()
+        today = date.today()
         data = Sale.objects.filter(stuff__market_id=market_id)
         data = data.filter(datetime__day=today.day, datetime__month=today.month, datetime__year=today.year)
         submissions_json = []
@@ -215,4 +214,33 @@ def make_sale(request):
 
 
 def control(request):
-    return render(request, 'uchet/control.html')
+    market_choose = False
+    markets = Market.spisok(request)
+    return render(request, 'uchet/control.html', {'markets': markets, 'market_choose': market_choose})
+
+
+def export_stuffs_csv(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="Stuff_table.csv"'
+    x = Stuff.objects.all()
+    use = x.model._meta
+    fields = [field for field in use.get_fields() if not field.many_to_many and not field.one_to_many]
+    print(fields)
+    writer = csv.writer(response)
+    writer.writerow([field.verbose_name for field in fields])
+    for obj in x:
+        data_row = []
+        for field in fields:
+            value = getattr(obj, field.name)
+            if isinstance(value, datetime.datetime):
+                value = value.strftime('%d/%m/%Y')
+            data_row.append(value)
+        writer.writerow(data_row)
+    return response
+
+
+def store_control(request, id):
+    market_id = id
+    stuffs = Stuff.objects.get(market_id=market_id)
+    market_choose = True
+    return render(request, 'uchet/control.html', {'market_choose': market_choose, 'stuffs': stuffs})

@@ -1,0 +1,21 @@
+{% extends 'uchet/base.html' %} {% load staticfiles %}
+{% block content %}
+    {% if market_choose%}
+        <table border="1" width="100%" cellpadding="5">
+
+         </table>
+
+    {% else %}
+    <div class="hi">Магазины {{ user }} ,
+        {% if markets%}
+                  Выберите магазин :
+                  {% for i in markets%}
+                    <h1><a href="{% url 'store_control' id=i.id %}">{{i}}</a></h1>
+                  {% endfor %}
+              {% else %}
+                у вас нет магазинов
+              {% endif %}
+    </div>
+    {% endif %}
+<!-- <p><a href="/stuffs/export/csv/">Get sales</a></p>
+{% endblock %}
