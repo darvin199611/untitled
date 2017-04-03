@@ -1,0 +1,28 @@
+#stuff_table {
+    width: 60%;
+    margin: auto;
+    text-align: center;
+    border-collapse: separate;
+    border: 1px solid #ddd;
+    border-spacing: 10px;
+    border-radius: 3px;
+    background: #fdfdfd;
+    font-size: 14px;
+}
+
+td,
+th {
+    border: 1px solid #ddd;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+th {
+    background: #E4E4E4;
+}
+
+caption {
+    font-style: italic;
+    text-align: right;
+    color: #547901;
+}

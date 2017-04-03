@@ -6,7 +6,6 @@
                   {% for i in markets%}
                     <h1><a href="{% url 'market_detail' id=i.id %}">{{i}}</a></h1>
                   {% endfor %}
-
               {% else %}
                 у тебя нет магазинов
               {% endif %}

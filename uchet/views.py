@@ -1,6 +1,4 @@
 import csv
-import pickle
-
 from datetime import date
 from django.contrib import auth
 from django.contrib.auth import authenticate, login
@@ -233,6 +231,7 @@ def export_stuffs_csv(request):
         for field in fields:
             value = getattr(obj, field.name)
             if isinstance(value, datetime.datetime):
+                value = timezone.localtime(value)
                 value = value.strftime('%d/%m/%Y')
             data_row.append(value)
         writer.writerow(data_row)
@@ -241,6 +240,12 @@ def export_stuffs_csv(request):
 
 def store_control(request, id):
     market_id = id
-    stuffs = Stuff.objects.get(market_id=market_id)
+    stuffs = Stuff.objects.filter(market_id=market_id).order_by('created_date')
+    stuff = []
+    for obj in stuffs:
+        stuffss = {'id': obj.id, 'name': obj.name, 'picture': obj.picture,
+                   'price': str(obj.price), 'amount': str(obj.amount),
+                   'date': (timezone.localtime(obj.created_date)).strftime('%Y-%m-%d %H:%M')}
+        stuff.append(stuffss)
     market_choose = True
-    return render(request, 'uchet/control.html', {'market_choose': market_choose, 'stuffs': stuffs})
+    return render(request, 'uchet/control.html', {'market_choose': market_choose, 'stuffs': stuff})

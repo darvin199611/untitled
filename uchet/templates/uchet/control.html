@@ -1,10 +1,26 @@
 {% extends 'uchet/base.html' %} {% load staticfiles %}
 {% block content %}
+    <link rel="stylesheet" href="{% static 'css/control.css' %}">
     {% if market_choose%}
-        <table border="1" width="100%" cellpadding="5">
-
+        <a href="/stuffs/export/csv/">Экспорт в CSV</a>
+        <table id="stuff_table" border="1"  cellpadding="5">
+        <th>ID(Штрих-код)</th>
+        <th>Название</th>
+        <th>Цена</th>
+        <th>Дата создания</th>
+        <th>Количество на складе</th>
+        <th>Картинка</th>
+        {% for i in stuffs%}
+            <tr>
+                <td>{{i.id}}</td>
+                <td>{{i.name}}</td>
+                <td>{{i.price}}</td>
+                <td>{{i.date}}</td>
+                <td>{{i.amount}}</td>
+                <td>{% if i.picture %}<img src='{{i.picture.url}}' align="center" alt="error" height="40" width="40" /> {% endif %}
+            </tr>
+        {% endfor %}
          </table>
-
     {% else %}
     <div class="hi">Магазины {{ user }} ,
         {% if markets%}
