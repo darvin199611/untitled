@@ -14,6 +14,7 @@ from django.utils.datetime_safe import datetime
 from django.db.models.functions import datetime
 from uchet.models import UserProfile, Market, Stuff, Sale
 from .forms import UserForm, UserProfileForm
+from uchet.help_functions import check_premissions
 
 
 def main(request):
@@ -149,6 +150,7 @@ def profile__edit(request):
 
 def market_detail(request, id):
     market = get_object_or_404(Market, id=id)
+    check_premissions(request, market)
     stuffs = Stuff.objects.filter(market_id=id).order_by('created_date')
 
     return render(request, 'uchet/market_detail.html', {'market': market, 'stuffs': stuffs})
@@ -240,6 +242,9 @@ def export_stuffs_csv(request):
 
 def store_control(request, id):
     market_id = id
+    market = Market.objects.get(id=id)
+    check_premissions(request, market)  # функция проверяет принадлежит ли запрашиваемый экземпляр пользователю ,
+                                        # если нет , возвращает 404
     stuffs = Stuff.objects.filter(market_id=market_id).order_by('created_date')
     stuff = []
     for obj in stuffs:

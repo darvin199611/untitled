@@ -1,5 +1,6 @@
 {% extends 'uchet/base.html' %} {% load staticfiles %}
 {% block content %}
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/control.css' %}">
     {% if market_choose%}
         <a href="/stuffs/export/csv/">Экспорт в CSV</a>
@@ -10,6 +11,8 @@
         <th>Дата создания</th>
         <th>Количество на складе</th>
         <th>Картинка</th>
+        <th>Редактировать</th>
+        <th>Удалить</th>
         {% for i in stuffs%}
             <tr>
                 <td>{{i.id}}</td>
@@ -17,7 +20,9 @@
                 <td>{{i.price}}</td>
                 <td>{{i.date}}</td>
                 <td>{{i.amount}}</td>
-                <td>{% if i.picture %}<img src='{{i.picture.url}}' align="center" alt="error" height="40" width="40" /> {% endif %}
+                <td>{% if i.picture %}<img src='{{i.picture.url}}' align="center" alt="error" height="40" width="40" />{% endif %}
+                <td><a href="" class="glyphicon glyphicon-edit" data-stuff-id ={{ i.id }}></a></td>
+                <td><a href="" class="glyphicon glyphicon-trash" data-stuff-id ={{ i.id }}></a></td>
             </tr>
         {% endfor %}
          </table>
