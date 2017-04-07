@@ -1,4 +1,29 @@
-#stuff_table {
+#myInput{
+    margin: 5px;
+    border-radius: 4px;
+}
+
+#stuff_list {
+    width: 60%;
+    border: 1px solid #6140f5;
+    border-radius: 20px;
+    margin: auto;
+    padding: 1%;
+}
+
+.export_to_csv{
+    float: right;
+}
+
+.form-control{
+    width : 25%
+}
+
+#sel1{
+}
+
+#stuff_list #stuff_table{
+    top: 3%;
     width: 60%;
     margin: auto;
     text-align: center;
@@ -23,6 +48,13 @@ th {
 
 caption {
     font-style: italic;
-    text-align: right;
+    text-align: center;
     color: #547901;
+}
+
+#nav {
+    width: 20%;
+    float: left;
+    color: #2aabd2;
+
 }

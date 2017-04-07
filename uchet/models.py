@@ -22,14 +22,14 @@ class Market(models.Model):
 
 
 class Stuff(models.Model):
-    market = models.ForeignKey(Market)
-    name = models.CharField(max_length=200, )
-    description = models.TextField()
-    created_date = models.DateTimeField(
-        default=timezone.now)
-    picture = models.ImageField(upload_to='stuff_images', blank=True)
-    price = models.DecimalField('Цена', max_digits=8, decimal_places=2, blank=True, null=True)
-    amount = models.PositiveIntegerField(default=0)
+    market = models.ForeignKey(Market, verbose_name='Магазин')
+    name = models.CharField('Название', max_length=200)
+    description = models.TextField('Описание', blank=True)
+    created_date = models.DateTimeField('Дата создания',
+                                        default=timezone.now)
+    picture = models.ImageField('Каритнка', upload_to='stuff_images', blank=True)
+    price = models.DecimalField('Цена', max_digits=8, decimal_places=2, default=0)
+    amount = models.PositiveIntegerField('Количество на складе', default=0)
 
     def __str__(self):
         return self.name
