@@ -49,8 +49,25 @@
         </div>
   </div>
   <div id="menu2" class="tab-pane fade">
-    <h3>Menu 2</h3>
-    <p>Some content in menu 2.</p>
+    <h3>Продажи</h3>
+      <div id="sale_list">
+        <input type="text" id="myInput" onkeyup="Search()" placeholder="Поиск по товару...">
+        <a href="/stuffs/export/csv/" class="export_to_csv">Экспорт в CSV</a>
+        <table id="sale_table" border="1"  cellpadding="5">
+        <tr class="header">
+        <th onclick="sortTable_text(0)">Название</th>
+        <th onclick="sortTable_text(0)">Дата, время</th>
+        <th>В корзину</th>
+        </tr>
+        {% for i in sales%}
+            <tr>
+                <td onclick="sortTable_text(0)">{{i.stuff_name}}</td>
+                <td onclick="sortTable_text(1)">{{i.date}}</td>
+                <td><a href="" class="glyphicon glyphicon-trash" data-stuff-id ={{ i.id }}></a></td>
+            </tr>
+        {% endfor %}
+         </table>
+        </div>
   </div>
 </div>
     {% else %}
