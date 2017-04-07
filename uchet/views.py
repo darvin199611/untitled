@@ -254,3 +254,4 @@ def store_control(request, id):
         stuff.append(stuffss)
     market_choose = True
     return render(request, 'uchet/control.html', {'market_choose': market_choose, 'stuffs': stuff})
+
