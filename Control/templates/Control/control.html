@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{% static 'css/control.css' %}">
     <link rel="stylesheet" href="{% static 'css/libs/datepicker.min.css' %}">
     <script src={% static "js/libs/jquery-3.2.0.js" %}></script>
-    <script src={% static "js/sort_and_filter_table.js" %}></script>
+    <script src={% static "js/libs/datepicker.min.js" %}></script>
 
     {% if market_choose%}
 
@@ -52,26 +52,39 @@
   </div>
   <div id="menu2" class="tab-pane fade">
     <h3>Продажи</h3>
-      <div id="sale_list">
-        <input type="text" id="myInput" onkeyup="Search()" placeholder="Поиск по товару...">
-        <a href="/stuffs/export/csv/" class="export_to_csv">Экспорт в CSV</a>
-        <table id="sale_table" border="1"  cellpadding="5">
-        <tr class="header">
-        <th onclick="sortTable_text(0)">Название</th>
-        <th onclick="sortTable_text(0)">Дата, время</th>
-        <th>В корзину</th>
-        </tr>
-        {% for i in sales%}
-            <tr>
-                <td onclick="sortTable_text(0)">{{i.stuff_name}}</td>
-                <td onclick="sortTable_text(1)">{{i.date}}</td>
-                <td><a href="" class="glyphicon glyphicon-trash" data-stuff-id ={{ i.id }}></a></td>
-            </tr>
-        {% endfor %}
-         </table>
+        <div id="sale_list">
+    <label for="date_from">От: </label><input id="date_from" type="text" class="datepicker-here"/>
+    <label for="date_to">До: </label><input id="date_to" type="text" class="datepicker-here"  />
+    <div id="dateclicks">
+    <a href="#"  class="date_click" data-range ='today' >За сегодня</a>
+    <a href="#" class="date_click" data-range ='week' >За неделю</a>
+    <a href="#" class="date_click" data-range = 'month' >За месяц</a>
+    <a href="#" class="date_click" data-range = 'all_time' >За все время</a>
+    </div>
+        <table id="sale_table" border="1"  cellpadding="5" data-market-created-date = "2017-01-01"></table>
         </div>
-  </div>
-</div>
+
+
+{#      <div id="sale_list">#}
+{#        <input type="text" id="myInput" onkeyup="Search()" placeholder="Поиск по товару...">#}
+{#        <a href="/stuffs/export/csv/" class="export_to_csv">Экспорт в CSV</a>#}
+{#        <table id="sale_table" border="1"  cellpadding="5">#}
+{#        <tr class="header">#}
+{#        <th onclick="sortTable_text(0)">Название</th>#}
+{#        <th onclick="sortTable_text(0)">Дата, время</th>#}
+{#        <th>В корзину</th>#}
+{#        </tr>#}
+{#        {% for i in sales%}#}
+{#            <tr>#}
+{#                <td onclick="sortTable_text(0)">{{i.stuff_name}}</td>#}
+{#                <td onclick="sortTable_text(1)">{{i.date}}</td>#}
+{#                <td><a href="" class="glyphicon glyphicon-trash" data-stuff-id ={{ i.id }}></a></td>#}
+{#            </tr>#}
+{#        {% endfor %}#}
+{#         </table>#}
+{#        </div>#}
+{#  </div>#}
+{#</div>#}
     {% else %}
     <div class="hi">Магазины {{ user }} ,
         {% if markets%}
@@ -85,4 +98,6 @@
     </div>
     {% endif %}
 <!-- <p><a href="/stuffs/export/csv/">Get sales</a></p> -->
+    <script src={% static "js/sort_and_filter_table.js" %}></script>
+    <script src={% static "js/control.js" %}></script>
 {% endblock %}

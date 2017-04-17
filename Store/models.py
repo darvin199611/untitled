@@ -21,7 +21,7 @@ class Market(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = "Мвгазин"
+        verbose_name = "Магазин"
         verbose_name_plural = "Магазины"
 
 
@@ -34,6 +34,7 @@ class Stuff(models.Model):
     amount = models.PositiveIntegerField('Количество на складе', default=0)
     created = models.DateTimeField('Создан', default=timezone.now, auto_now=False)
     updated = models.DateTimeField('Изменен', auto_now_add=False, auto_now=True)
+    is_active = models.BooleanField('Активен', default=True)
 
     def __str__(self):
         return self.name
@@ -64,6 +65,7 @@ class UserProfile(models.Model):
 class Sale(models.Model):
     stuff = models.ForeignKey(Stuff)
     created = models.DateTimeField('Создан', default=timezone.now, auto_now=False)
+    active = models.BooleanField(default=True)
 
     class Meta:
         ordering = ['created']
