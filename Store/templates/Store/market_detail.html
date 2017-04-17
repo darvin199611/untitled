@@ -1,0 +1,54 @@
+ {% extends 'Store/base.html' %} {% load staticfiles %} {% block content %}
+<link rel="stylesheet" href="{% static 'css/market_detail.css' %}">
+<link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic" rel="stylesheet" type="text/css">
+
+<div class="market_data" data-market_id="{{ market.id }}"></div>
+<input type="hidden" id="market_id" value="{{ market.id }}">
+
+<div class="market">
+    {% if market.created_date %}
+    <div class="date">
+        {{ market.created_date }}
+    </div>
+    {% endif %} {{ market.description|linebreaksbr }} {% if market.picture %}<img src={{market.picture.url }} align="left" alt="error" hspace="50" vspace="20" /> {% endif %}
+</div>
+
+
+
+<form method="POST" class="form-group" id="get_stuff_form">{% csrf_token %}
+    <br/>
+    <div class="fieldWrapper" id="the_stuff_get">
+        <input type="number" class="form-control" min="1" max="9999" id="stuff_pk" required placeholder="Штрих-код" name="stuff_pk">
+        <div id="results"></div>
+        <!-- errors go here -->
+    </div>
+    <div class="center"><button type="submit" class="btn btn-success">Submit</button></div>
+
+</form>
+
+<table id="sales">
+</table>
+
+
+<div id="modal_form">
+    <!-- Сaмo oкнo -->
+    <span id="modal_close">X</span>
+    <!-- Кнoпкa зaкрыть -->
+
+    <div id="cheto">
+        <div id="stuffname"> </div>
+        <div id="stuffdescription"> </div>
+        <div id="stuffimage"> </div>
+        <div id="stuffamount"> </div>
+        <div id="stuffprice"> </div>
+    </div>
+    <button type="button" class="btn btn-success" id="successbtn">Продать</button>
+</div>
+<div id="overlay"></div>
+<!-- Пoдлoжкa -->
+<script src={% static "js/libs/jquery-3.2.0.js" %}></script>
+<script src={% static "js/sale.js" %}></script>
+<script src={% static "js/makesale.js" %}></script>
+<script src={%static 'js/get_stuff_to_modal.js'%}></script>
+<script src={%static 'js/modal_window.js'%}></script>
+{% endblock %}
