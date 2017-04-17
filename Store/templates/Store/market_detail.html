@@ -6,9 +6,9 @@
 <input type="hidden" id="market_id" value="{{ market.id }}">
 
 <div class="market">
-    {% if market.created_date %}
+    {% if market.created %}
     <div class="date">
-        {{ market.created_date }}
+        {{ market.created }}
     </div>
     {% endif %} {{ market.description|linebreaksbr }} {% if market.picture %}<img src={{market.picture.url }} align="left" alt="error" hspace="50" vspace="20" /> {% endif %}
 </div>

@@ -5,7 +5,7 @@
         <form action="{% url 'profile__edit' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group">
-                {{ form.website|add_class:'form-control' }}
+                {{ form.website|add_class:'form-Control' }}
                 <small id="passwordHelpInline" class="text-muted">
       Must be 8-20 characters long.
          </small>

@@ -19,7 +19,7 @@ from Store.help_functions import check_premissions
 
 def main(request):
     if request.user.is_authenticated:
-        markets = Market.spisok(request)
+        markets = Market.list(request)
         return render(request, 'Store/main.html', {'markets': markets})
     else:
         return render(request, 'Store/main.html')
@@ -151,7 +151,7 @@ def profile__edit(request):
 def market_detail(request, id):
     market = get_object_or_404(Market, id=id)
     check_premissions(request, market)
-    stuffs = Stuff.objects.filter(market_id=id).order_by('created_date')
+    stuffs = Stuff.objects.filter(market_id=id).order_by('created')
 
     return render(request, 'Store/market_detail.html', {'market': market, 'stuffs': stuffs})
 
@@ -161,11 +161,11 @@ def get_market_sales(request):
         market_id = request.GET['market_id']
         today = date.today()
         data = Sale.objects.filter(stuff__market_id=market_id)
-        data = data.filter(datetime__day=today.day, datetime__month=today.month, datetime__year=today.year)
+        data = data.filter(created__day=today.day, created__month=today.month, created__year=today.year)
         submissions_json = []
         for si in data:
             submissions_json.append({'stuff': si.stuff.name, 'price': str(si.stuff.price),
-                                     'dt': (timezone.localtime(si.datetime)).strftime('%Y-%m-%d %H:%M')})
+                                     'dt': (timezone.localtime(si.created)).strftime('%Y-%m-%d %H:%M')})
         response_data = {
             'submissions': submissions_json
         }
@@ -213,12 +213,6 @@ def make_sale(request):
         return HttpResponse("done")
 
 
-def control(request):
-    market_choose = False
-    markets = Market.spisok(request)
-    return render(request, 'Store/control.html', {'markets': markets, 'market_choose': market_choose})
-
-
 def export_stuffs_csv(request):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="Stuff_table.csv"'
@@ -240,24 +234,3 @@ def export_stuffs_csv(request):
     return response
 
 
-def store_control(request, id):
-    market_id = id
-    market = Market.objects.get(id=id)
-    check_premissions(request, market)  # функция проверяет принадлежит ли запрашиваемый экземпляр пользователю ,
-                                        # если нет , возвращает 404
-    sales = Sale.objects.filter(stuff__market_id=market_id)
-    print(sales)
-    stuffs = Stuff.objects.filter(market_id=market_id).order_by('created_date')
-    stuff = []
-    sale = []
-    for obj in sales:
-        sale_list = {'stuff_name': obj.stuff,
-                     'date': (timezone.localtime(obj.datetime)).strftime('%Y-%m-%d %H:%M')}
-        sale.append(sale_list)
-    for obj in stuffs:
-        stuffss = {'id': obj.id, 'name': obj.name, 'picture': obj.picture,
-                   'price': str(obj.price), 'amount': str(obj.amount),
-                   'date': (timezone.localtime(obj.created_date)).strftime('%Y-%m-%d %H:%M')}
-        stuff.append(stuffss)
-    market_choose = True
-    return render(request, 'Store/control.html', {'market_choose': market_choose, 'stuffs': stuff, 'sales': sale, })
