@@ -164,7 +164,7 @@ def get_market_sales(request):
         data = data.filter(created__day=today.day, created__month=today.month, created__year=today.year)
         submissions_json = []
         for si in data:
-            submissions_json.append({'stuff': si.stuff.name, 'price': str(si.stuff.price),
+            submissions_json.append({'stuff': si.stuff.name, 'price': str(si.price),
                                      'dt': (timezone.localtime(si.created)).strftime('%Y-%m-%d %H:%M')})
         response_data = {
             'submissions': submissions_json
@@ -208,7 +208,8 @@ def get_stuff(request):
 def make_sale(request):
     if request.method == "POST":
         stuff_pk = request.POST.get('stuff_pk')
-        sale = Sale(stuff_id=stuff_pk)
+        stuff = get_object_or_404(Stuff, id=stuff_pk)
+        sale = Sale(stuff_id=stuff_pk, price=stuff.price)
         sale.save()
         return HttpResponse("done")
 

@@ -58,3 +58,18 @@ caption {
     color: #2aabd2;
 
 }
+table{
+    text-align: center;
+    border-collapse: separate;
+    border: 1px solid #ddd;
+    border-spacing: 10px;
+    border-radius: 3px;
+    background: #fdfdfd;
+    font-size: 14px;
+}
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus{
+background-color:#55a2f9;
+color:whitesmoke;
+}
+

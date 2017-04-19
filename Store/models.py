@@ -64,6 +64,7 @@ class UserProfile(models.Model):
 
 class Sale(models.Model):
     stuff = models.ForeignKey(Stuff)
+    price = models.DecimalField('Цена', max_digits=8, decimal_places=2, default=0)
     created = models.DateTimeField('Создан', default=timezone.now, auto_now=False)
     active = models.BooleanField(default=True)
 

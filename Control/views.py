@@ -48,7 +48,7 @@ def take_sales(request):
     data = Sale.objects.filter(created__range=[date_start, date_end]).filter(active=True)
     sales_json = []
     for si in data:
-        sales_json.append({'stuff': si.stuff.name, 'price': str(si.stuff.price),
+        sales_json.append({'stuff': si.stuff.name, 'price': str(si.price),
                            'dt': (timezone.localtime(si.created)).strftime('%Y-%m-%d %H:%M'), 'id': si.id})
     response_data = {
         'sales': sales_json

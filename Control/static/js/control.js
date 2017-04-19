@@ -65,7 +65,7 @@ function get_sales_by_date(date_start,date_end) {
             success: function (data) {
     console.log(data);
     var table = $('#sale_table');
-    table.html("<thead><tr><th>Товар</th><th>Цена</th><th>Время</th><th>В корзину</th></tr></thead>");
+    table.html("<thead><tr><th id='sale_table_stuff'>Товар</th><th id='sale_table_price'>Цена</idth><th id='sale_table_time' >Время</th><th>В корзину</th></tr></thead>");
     data.sales.forEach(function (sale) {
         var row = $('<tr>');
         row.append($('<td>').text(sale.stuff));
@@ -160,6 +160,11 @@ $(document).on('click', "a.sale_trash", function(event) {
         });
 
     }
+});
+$(document).on('click', "a.date_click", function(event) {
+    event.preventDefault();
+    var range = this.getAttribute('data-range');
+    default_range(range)
 });
 $(document).on('click', "a.date_click", function(event) {
     event.preventDefault();
