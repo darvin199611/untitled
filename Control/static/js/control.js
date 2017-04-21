@@ -166,8 +166,6 @@ $(document).on('click', "a.date_click", function(event) {
     var range = this.getAttribute('data-range');
     default_range(range)
 });
-$(document).on('click', "a.date_click", function(event) {
-    event.preventDefault();
-    var range = this.getAttribute('data-range');
-    default_range(range)
+$(document).on('click', "#sale_table_stuff", function(event) {
+    sortTable_text('sale_table',0)
 });

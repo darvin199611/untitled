@@ -22,15 +22,15 @@
   <div id="menu1" class="tab-pane fade">
     <h3>Товары</h3>
       <div id="stuff_list">
-        <input type="text" id="myInput" onkeyup="Search('myInput','stuff_table')" placeholder="Поиск по названию...">
+        <input type="text" id="myInput" onkeyup="Search('myInput','stuff_table',1)" placeholder="Поиск по названию...">
         <a href="/stuffs/export/csv/" class="export_to_csv">Экспорт в CSV</a>
         <table id="stuff_table" border="1"  cellpadding="5">
         <tr class="header">
         <th>ID(Штрих-код)</th>
-        <th onclick="sortTable_text(1)">Название</th>
-        <th onclick="sortTable_number(2)" >Цена</th>
-        <th onclick="sortTable_text(3)">Дата создания</th>
-        <th onclick="sortTable_number(4)">Количество на складе</th>
+        <th onclick="sortTable_text('stuff_table',1)">Название</th>
+        <th onclick="sortTable_number('stuff_table',2)" >Цена</th>
+        <th onclick="sortTable_text('stuff_table',3)">Дата создания</th>
+        <th onclick="sortTable_number('stuff_table',4)">Количество на складе</th>
         <th>Картинка</th>
         <th>Редактировать</th>
         <th>Удалить</th>
@@ -53,7 +53,7 @@
   <div id="menu2" class="tab-pane fade">
     <h3>Продажи</h3>
         <div id="sale_list">
-            <input type="text" id="SaleFilterInput" onkeyup="Search('SaleFilterInput','sale_table')" placeholder="Поиск по товару...">
+            <input type="text" id="SaleFilterInput" onkeyup="Search('SaleFilterInput','sale_table',0)" placeholder="Поиск по товару...">
             <a href="/stuffs/export/csv/" class="export_to_csv">Экспорт в CSV</a>
     <label for="date_from">От: </label><input id="date_from" type="text" class="datepicker-here"/>
     <label for="date_to">До: </label><input id="date_to" type="text" class="datepicker-here"  />

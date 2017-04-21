@@ -1,7 +1,7 @@
 /**
  * Created by anton on 05.04.17.
  */
-function Search(input_id,table_id) {
+function Search(input_id,table_id,column) {
   // Declare variables
   var input, filter, table, tr, td, i;
   input = document.getElementById(input_id);
@@ -11,7 +11,7 @@ function Search(input_id,table_id) {
 
   // Loop through all table rows, and hide those who don't match the search query
   for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[1];
+    td = tr[i].getElementsByTagName("td")[column];
     if (td) {
       if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
         tr[i].style.display = "";
@@ -23,9 +23,9 @@ function Search(input_id,table_id) {
 }
 
 
-function sortTable_text(n) {
+function sortTable_text(table_id,n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-  table = document.getElementById("stuff_table");
+  table = document.getElementById(table_id);
   switching = true;
   //Set the sorting direction to ascending:
   dir = "asc";
@@ -79,9 +79,9 @@ function sortTable_text(n) {
 }
 
 
-function sortTable_number(n) {
+function sortTable_number(table_id,n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-  table = document.getElementById("stuff_table");
+  table = document.getElementById(table_id);
   switching = true;
   //Set the sorting direction to ascending:
   dir = "asc";
