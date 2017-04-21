@@ -1,6 +1,5 @@
-/myvenv/
-/.idea/
-/idea/
+.idea
+idea
 *.zip
 *.log
 *.pdf
