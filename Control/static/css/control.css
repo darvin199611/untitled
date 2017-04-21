@@ -1,4 +1,4 @@
-#myInput{
+#myInput {
     margin: 5px;
     border-radius: 4px;
 }
@@ -11,26 +11,23 @@
     padding: 1%;
 }
 
-.export_to_csv{
+.export_to_csv {
     float: right;
 }
 
-.form-control{
-    width : 25%
+.form-control {
+    width: 25%
 }
 
-#sel1{
-}
+#sel1 {}
 
-#stuff_list #stuff_table{
+#stuff_list #stuff_table {
     top: 3%;
     width: 60%;
     margin: auto;
-
 }
 
-td,
-th {
+td, th {
     border: 1px solid #ddd;
     padding: 5px;
     border-radius: 3px;
@@ -51,9 +48,9 @@ caption {
     width: 20%;
     float: left;
     color: #2aabd2;
-
 }
-table{
+
+table {
     text-align: center;
     border-collapse: separate;
     border: 1px solid #ddd;
@@ -63,8 +60,7 @@ table{
     font-size: 14px;
 }
 
-.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus{
-background-color:#55a2f9;
-color:whitesmoke;
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
+    background-color: #55a2f9;
+    color: whitesmoke;
 }
-

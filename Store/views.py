@@ -48,19 +48,22 @@ def register(request):
 
             # Теперь разберемся с экземпляром UserProfile.
             # Поскольку мы должны сами назначить атрибут пользователя, необходимо приравнять commit=False.
-            # Это отложит сохранение модели, чтобы избежать проблем целостности.
+            # Это отложит сохранение модели, чтобы избежать проблем
+            # целостности.
             profile = profile_form.save(commit=False)
             profile.user = user
 
             # Предоставил ли пользователь изображение для профиля?
-            # Если да, необходимо извлечь его из формы и поместить в модель UserProfile.
+            # Если да, необходимо извлечь его из формы и поместить в модель
+            # UserProfile.
             if 'picture' in request.FILES:
                 profile.picture = request.FILES['picture']
 
             # Теперь мы сохраним экземпляр модели UserProfile.
             profile.save()
 
-            # Обновляем нашу переменную, чтобы указать, что регистрация прошла успешно.
+            # Обновляем нашу переменную, чтобы указать, что регистрация прошла
+            # успешно.
             registered = True
 
         # Неправильная формы или формы - ошибки или ещё какая-нибудь проблема?
@@ -88,12 +91,14 @@ def user_login(request):
         # Эта информация извлекается из формы входа в систему.
         # Мы используем request.POST.get('<имя переменной>') вместо request.POST['<имя переменной>'],
         # потому что request.POST.get('<имя переменной>') вернет None, если значения не существует,
-        # тогда как request.POST['<variable>'] создаст исключение, связанное с отсутствем значения с таким ключом
+        # тогда как request.POST['<variable>'] создаст исключение, связанное с
+        # отсутствем значения с таким ключом
         username = request.POST.get('username')
         password = request.POST.get('password')
 
         # Используйте Django, чтобы проверить является ли правильным
-        # сочетание имя пользователя/пароль - если да, то возвращается объект User.
+        # сочетание имя пользователя/пароль - если да, то возвращается объект
+        # User.
         user = authenticate(username=username, password=password)
 
         # Если мы получили объект User, то данные верны.
@@ -110,7 +115,8 @@ def user_login(request):
                 # Использовался не активный аккуант - запретить вход!
                 return HttpResponse("Your account is disabled.")
         else:
-            # Были введены неверные данные для входа. Из-за этого вход в систему не возможен.
+            # Были введены неверные данные для входа. Из-за этого вход в
+            # систему не возможен.
             print("Invalid login details: {0}, {1}".format(username, password))
             if username or password == 0:
                 error = "Неверный логин или пароль"
@@ -136,7 +142,8 @@ def profile(request):
 @login_required
 def profile__edit(request):
     profile = UserProfile.objects.get(user=request.user)
-    form = UserProfileForm(request.POST, request.FILES or None, instance=profile, auto_id=False)
+    form = UserProfileForm(
+        request.POST, request.FILES or None, instance=profile, auto_id=False)
 
     if request.POST:
         if form.is_valid():
@@ -161,7 +168,8 @@ def get_market_sales(request):
         market_id = request.GET['market_id']
         today = date.today()
         data = Sale.objects.filter(stuff__market_id=market_id)
-        data = data.filter(created__day=today.day, created__month=today.month, created__year=today.year)
+        data = data.filter(created__day=today.day,
+                           created__month=today.month, created__year=today.year)
         submissions_json = []
         for si in data:
             submissions_json.append({'stuff': si.stuff.name, 'price': str(si.price),
@@ -219,7 +227,8 @@ def export_stuffs_csv(request):
     response['Content-Disposition'] = 'attachment; filename="Stuff_table.csv"'
     x = Stuff.objects.all()
     use = x.model._meta
-    fields = [field for field in use.get_fields() if not field.many_to_many and not field.one_to_many]
+    fields = [field for field in use.get_fields(
+    ) if not field.many_to_many and not field.one_to_many]
     print(fields)
     writer = csv.writer(response)
     writer.writerow([field.verbose_name for field in fields])
@@ -233,5 +242,3 @@ def export_stuffs_csv(request):
             data_row.append(value)
         writer.writerow(data_row)
     return response
-
-

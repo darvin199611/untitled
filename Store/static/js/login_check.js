@@ -9,7 +9,7 @@ function checkLogin(login) {
             },
             dataType: "text",
             cache: false,
-            success: function (data) {
+            success: function(data) {
                 console.log(data);
                 if (data == 'yes') {
                     console.log("yes");

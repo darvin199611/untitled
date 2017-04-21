@@ -16,4 +16,3 @@ urlpatterns = [
     url(r'^make_sale/$', views.make_sale, name='make_sale'),
     url(r'^stuffs/export/csv/$', views.export_stuffs_csv, name='export_stuffs_csv'),
 ]
-

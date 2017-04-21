@@ -16,7 +16,8 @@ def control(request):
 def store_control(request, id):
     market_id = id
     market = Market.objects.get(id=id)
-    check_premissions(request, market)  # функция проверяет принадлежит ли запрашиваемый экземпляр пользователю ,
+    # функция проверяет принадлежит ли запрашиваемый экземпляр пользователю ,
+    check_premissions(request, market)
     # если нет , возвращает 404
     sales = Sale.objects.filter(stuff__market_id=market_id)
     print(sales)
@@ -42,10 +43,12 @@ def take_sales(request):
     date_end = request.GET['date_end']
     date_end = dt.strptime(date_end, "%d.%m.%Y")
     date_start = dt.strptime(date_start, "%d.%m.%Y")
-    date_end = date_end + timedelta(days=1)  # добавляем к date_end 1 день, чтоб выводило данные за выбраный
+    # добавляем к date_end 1 день, чтоб выводило данные за выбраный
+    date_end = date_end + timedelta(days=1)
     #  диапазон
     # включительно 0
-    data = Sale.objects.filter(created__range=[date_start, date_end]).filter(active=True)
+    data = Sale.objects.filter(
+        created__range=[date_start, date_end]).filter(active=True)
     sales_json = []
     for si in data:
         sales_json.append({'stuff': si.stuff.name, 'price': str(si.price),

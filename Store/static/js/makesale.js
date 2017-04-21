@@ -1,7 +1,7 @@
 /**
  * Created by skryn on 28.03.2017.
  */
-$('#successbtn').click(function () {
+$('#successbtn').click(function() {
     create_sale();
 });
 
@@ -41,7 +41,7 @@ function sameOrigin(url) {
         !(/^(\/\/|http:|https:).*/.test(url));
 }
 $.ajaxSetup({
-    beforeSend: function (xhr, settings) {
+    beforeSend: function(xhr, settings) {
         if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
             // Send the token to same-origin, relative URLs only.
             // Send the token only if the method warrants CSRF protection
@@ -60,7 +60,7 @@ function create_sale() {
         }, // data sent with the post request
 
         // handle a successful response
-        success: function () {
+        success: function() {
             modalclose();
             loadSales();
         }

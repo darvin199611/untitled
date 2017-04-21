@@ -15,6 +15,7 @@ class MarketAdmin (admin.ModelAdmin):
     class Meta:
         model = Market
 
+
 admin.site.register(Market, MarketAdmin)
 
 
@@ -23,6 +24,7 @@ class UserProfileAdmin (admin.ModelAdmin):
 
     class Meta:
         model = UserProfile
+
 
 admin.site.register(UserProfile, UserProfileAdmin)
 
@@ -33,6 +35,7 @@ class StuffAdmin (admin.ModelAdmin):
     class Meta:
         model = Stuff
 
+
 admin.site.register(Stuff, StuffAdmin)
 
 
@@ -41,5 +44,6 @@ class SaleAdmin (admin.ModelAdmin):
 
     class Meta:
         model = Sale
+
 
 admin.site.register(Sale, SaleAdmin)

@@ -65,15 +65,17 @@ function get_sales_by_date(date_start,date_end) {
             success: function (data) {
     console.log(data);
     var table = $('#sale_table');
-    table.html("<thead><tr><th id='sale_table_stuff'>Товар</th><th id='sale_table_price'>Цена</idth><th id='sale_table_time' >Время</th><th>В корзину</th></tr></thead>");
+    var tbody= $('<tbody>');
+    table.html("<thead><tr><th id='sale_table_stuff' data-type = 'string'>Товар</th><th id='sale_table_price' data-type ='number' >Цена</idth><th id='sale_table_time' data-type ='string'>Время</th><th>В корзину</th></tr></thead>");
     data.sales.forEach(function (sale) {
         var row = $('<tr>');
         row.append($('<td>').text(sale.stuff));
         row.append($('<td>').text(sale.price));
         row.append($('<td>').text(sale.dt));
         row.append($('<td>').html("<a href='#' class='glyphicon glyphicon-trash sale_trash' data-sale-id ='"+sale.id+"'></a>"));
-        table.prepend(row);
-    })
+        tbody.append(row);
+    });
+    table.prepend(tbody);
 }
 
         });
@@ -166,6 +168,6 @@ $(document).on('click', "a.date_click", function(event) {
     var range = this.getAttribute('data-range');
     default_range(range)
 });
-$(document).on('click', "#sale_table_stuff", function(event) {
-    sortTable_text('sale_table',0)
-});
+
+TableSorter('sale_table');
+TableSorter('stuff_table');

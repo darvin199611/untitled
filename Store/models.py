@@ -9,8 +9,10 @@ class Market(models.Model):
     name = models.CharField(max_length=20, default="market")
     description = models.TextField()
     picture = models.ImageField(upload_to='market_images', blank=True)
-    created = models.DateTimeField('Создан', default=timezone.now, auto_now=False)
-    updated = models.DateTimeField('Изменен', auto_now_add=False, auto_now=True)
+    created = models.DateTimeField(
+        'Создан', default=timezone.now, auto_now=False)
+    updated = models.DateTimeField(
+        'Изменен', auto_now_add=False, auto_now=True)
 
     def list(request):
         usr = request.user
@@ -29,11 +31,15 @@ class Stuff(models.Model):
     market = models.ForeignKey(Market, verbose_name='Магазин')
     name = models.CharField('Название', max_length=200)
     description = models.TextField('Описание', blank=True)
-    picture = models.ImageField('Каритнка', upload_to='stuff_images', blank=True)
-    price = models.DecimalField('Цена', max_digits=8, decimal_places=2, default=0)
+    picture = models.ImageField(
+        'Каритнка', upload_to='stuff_images', blank=True)
+    price = models.DecimalField(
+        'Цена', max_digits=8, decimal_places=2, default=0)
     amount = models.PositiveIntegerField('Количество на складе', default=0)
-    created = models.DateTimeField('Создан', default=timezone.now, auto_now=False)
-    updated = models.DateTimeField('Изменен', auto_now_add=False, auto_now=True)
+    created = models.DateTimeField(
+        'Создан', default=timezone.now, auto_now=False)
+    updated = models.DateTimeField(
+        'Изменен', auto_now_add=False, auto_now=True)
     is_active = models.BooleanField('Активен', default=True)
 
     def __str__(self):
@@ -45,14 +51,13 @@ class Stuff(models.Model):
 
 
 class UserProfile(models.Model):
-    # Эта строка обязательна. Она связывает UserProfile с экземпляром модели User.
     user = models.OneToOneField(User)
-    # Дополнительные атрибуты, которые мы хотим добавить.
     website = models.URLField(blank=True)
     picture = models.ImageField(upload_to='profile_images', blank=True)
-    created = models.DateTimeField('Создан', default=timezone.now, auto_now=False)
-    updated = models.DateTimeField('Изменен', auto_now_add=False, auto_now=True)
-    # Переопределяем метод __unicode__(), чтобы вернуть что-либо значимое! Используйте __str__() в Python 3.*
+    created = models.DateTimeField(
+        'Создан', default=timezone.now, auto_now=False)
+    updated = models.DateTimeField(
+        'Изменен', auto_now_add=False, auto_now=True)
 
     def __str__(self):
         return self.user.username
@@ -64,8 +69,10 @@ class UserProfile(models.Model):
 
 class Sale(models.Model):
     stuff = models.ForeignKey(Stuff)
-    price = models.DecimalField('Цена', max_digits=8, decimal_places=2, default=0)
-    created = models.DateTimeField('Создан', default=timezone.now, auto_now=False)
+    price = models.DecimalField(
+        'Цена', max_digits=8, decimal_places=2, default=0)
+    created = models.DateTimeField(
+        'Создан', default=timezone.now, auto_now=False)
     active = models.BooleanField(default=True)
 
     class Meta:
@@ -75,5 +82,3 @@ class Sale(models.Model):
 
     def __str__(self):
         return self.stuff.name
-
-
