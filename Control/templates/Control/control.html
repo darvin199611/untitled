@@ -78,7 +78,6 @@
             <h1><a href="{% url 'store_control' id=i.id %}">{{i}}</a></h1> {% endfor %} {% else %} у вас нет магазинов {% endif %}
         </div>
         {% endif %}
-        <!-- <p><a href="/stuffs/export/csv/">Get sales</a></p> -->
         <script src={% static "js/filter_table.js" %}></script>
         <script src={% static "js/control.js" %}></script>
         {% endblock %}
