@@ -20,7 +20,6 @@ def store_control(request, id):
     check_premissions(request, market)
     # если нет , возвращает 404
     sales = Sale.objects.filter(stuff__market_id=market_id)
-    print(sales)
     stuffs = Stuff.objects.filter(market_id=market_id).order_by('created')
     stuff = []
     sale = []
