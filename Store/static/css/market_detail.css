@@ -1,15 +1,15 @@
 #modal_form {
-    width: 300px;
+    width: 600px;
     height: 300px;
     /* Рaзмеры дoлжны быть фиксирoвaны */
     border-radius: 5px;
-    border: 3px #000 solid;
+    border: 4px #7b97ff solid;
     background: #fff;
     position: fixed;
     /* чтoбы oкнo былo в видимoй зoне в любoм месте */
     top: 45%;
     /* oтступaем сверху 45%, oстaльные 5% пoдвинет скрипт */
-    left: 50%;
+    left: 39%;
     /* пoлoвинa экрaнa слевa */
     margin-top: -150px;
     margin-left: -150px;
@@ -36,6 +36,8 @@
     right: 10px;
     cursor: pointer;
     display: block;
+    color: red;
+    text-align: center;
 }
 
 
@@ -112,12 +114,16 @@ caption {
     color: #547901;
 }
 
-textarea {
+#modal_form textarea {
+    position: absolute;
+    top: 56px;
     border-radius: 2px;
     overflow-y: scroll;
-    max-height: 80px;
-    width: 100%;
+    height: 180px;
+    width: 300px;
     resize: none;
+    font-family: 'EB Garamond', serif;
+    font-size: 18px;
     /* Remove this if you want the user to resize the textarea */
 }
 
@@ -126,20 +132,47 @@ textarea {
 }
 
 #stuffimage {
-    position: relative;
-    left: 87px;
-    height: 110px;
-    width: 110px;
+    position: absolute;
+    right: 50px;
+    height: 180px;
+    width: 180px;
+    padding: 6px;
+    border: 2px;
 }
-
-#stuffimage img {
-    height: 100px;
-    width: 100px;
+#stuffimage img{
+    position: absolute;
+    height: 100%;
+    width: 100%;
 }
 
 #stuffname {
-    font-family: "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;
-    font-size: larger;
+    font-family: 'Alice', serif;
+    font-size: 25px;
     text-align: center;
-    font-weight: 800;
+    font-weight: 300;
+}
+#modal_form button{
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+}
+
+#modal_form #stuffprice{
+    position: absolute;
+    width: 200px;
+    left: 115px;
+    bottom: 10px;
+    font-family: 'Arial', 'sans-serif';
+    font-weight: 700;
+    font-size: 19px;
+}
+
+#modal_form #stuffamount{
+    position: absolute;
+    width: 300px;
+    left: 290px;
+    bottom: 10px;
+    font-family: 'Arial', 'sans-serif';
+    font-weight: 700;
+    font-size: 19px;
 }

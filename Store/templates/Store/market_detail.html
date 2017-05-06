@@ -1,6 +1,7 @@
  {% extends 'Store/base.html' %} {% load staticfiles %} {% block content %}
 <link rel="stylesheet" href="{% static 'css/market_detail.css' %}">
 <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Alice|EB+Garamond" rel="stylesheet">
 
 <div class="market_data" data-market_id="{{ market.id }}"></div>
 <input type="hidden" id="market_id" value="{{ market.id }}">
